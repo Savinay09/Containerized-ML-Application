@@ -17,7 +17,7 @@ def client():
 def test_predict(client):
     data = {"text": ["I hate you.", "I love you."]}
     response = client.post(
-        "/project-predict",
+        "/bulk-predict",
         json=data,
     )
     print(response.json())
@@ -58,3 +58,30 @@ def test_predict(client):
         )
         is None
     )
+
+def test_health(client):
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["status"] == "healthy"
+
+def test_invalid_input(client):
+    data = {"text": "Invalid list of text"}
+    response = client.post("/bulk-predict", json=data)
+    assert response.status_code == 422
+
+def test_invalid_input_2(client):
+    data = {"text": 123}
+    response = client.post("/bulk-predict", json=data)
+    assert response.status_code == 422
+
+def test_cache(client):
+    data = {"text": ["Same", "Same"]}
+    response1 = client.post("/bulk-predict", json=data)
+    response2 = client.post("/bulk-predict", json=data)
+    assert response1.json() == response2.json()
+
+def test_model_output_consistency(client):
+    data = {"text": ["longer outputs just testing 1", "longer outputs just testing 2"]}
+    response = client.post("/bulk-predict", json=data)
+    assert response.status_code == 200
+    assert len(response.json()["predictions"]) == 2

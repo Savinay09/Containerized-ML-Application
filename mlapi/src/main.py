@@ -9,6 +9,7 @@ from fastapi_cache.decorator import cache
 from pydantic import BaseModel
 from redis import asyncio
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
+from typing import List
 
 model_path = "./distilbert-base-uncased-finetuned-sst2"
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
@@ -39,16 +40,16 @@ app = FastAPI(lifespan=lifespan)
 
 
 class SentimentRequest(BaseModel):
-    pass
+    text: List[str]
 
 
 class Sentiment(BaseModel):
-    pass
+    label: str
+    score: float
 
 
 class SentimentResponse(BaseModel):
-    # ... [Sentiment]
-    pass
+    predictions: List[List[Sentiment]]
 
 
 @app.post("/bulk-predict", response_model=SentimentResponse)

@@ -1,4 +1,3 @@
-distilbert-base-uncased-finetuned-sst2/
 *.pyc
 .DS_Store
 .env
@@ -10,3 +9,4 @@ __pycache__/
 .DS_STORE
 .venv/
 *.csv
+distilbert-base-uncased-finetuned-sst2

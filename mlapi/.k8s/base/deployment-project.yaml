@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-api-deployment
+  namespace: savinay
+  labels:
+    app: project-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: project-deployment
+  template:
+    metadata:
+      labels:
+        app: project-deployment
+    spec:
+      containers:
+        - name: project-prediction-container
+          image: w255mids.azurecr.io/savinay/project:latest  # Update this to a specific version as needed
+          env:
+            - name: REDIS_URL
+              value: redis://redis-service
+            - name: REDIS_PORT
+              value: '6379'
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+            initialDelaySeconds: 1
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+            failureThreshold: 30
+            periodSeconds: 10
