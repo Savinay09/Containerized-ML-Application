@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: project-prediction-container
-          image: w255mids.azurecr.io/savinay/project
+          image: w255mids.azurecr.io/savinay/project:5a1e490
           env:
             - name: REDIS_URL
               value: redis://redis-service
