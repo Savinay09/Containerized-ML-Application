@@ -15,7 +15,7 @@ spec:
         uri: "/"
       route:
         - destination:
-            host: lab4-prediction-service
+            host: prediction-service  
             port:
               number: 8000
     - match:
@@ -25,7 +25,7 @@ spec:
         uri: "/"
       route:
         - destination:
-            host: project-prediction-service
+            host: project-service
             port:
               number: 8000
     - match:
@@ -33,6 +33,6 @@ spec:
             prefix: "/"
       route:
         - destination:
-            host: lab4-prediction-service
+            host: prediction-service 
             port:
               number: 8000

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to your project directory if necessary
-cd /Users/savinaychandrupatla/Documents/GitHub/project-pytorch-fastapi-Savinay09
+cd /Users/savinaychandrupatla/Documents/GitHub/project-pytorch-fastapi-Savinay09/mlapi
 
 # Get the short commit hash
 git_commit_hash=$(git rev-parse --short HEAD)
