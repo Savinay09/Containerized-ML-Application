@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: project-prediction-container
-          image: w255mids.azurecr.io/savinay/project:latest  # Update this to a specific version as needed
+          image: w255mids.azurecr.io/savinay/project
           env:
             - name: REDIS_URL
               value: redis://redis-service

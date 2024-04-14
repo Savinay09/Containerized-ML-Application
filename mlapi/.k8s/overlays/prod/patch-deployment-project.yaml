@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: project-prediction-container 
-          image: w255mids.azurecr.io/savinay/project:df66ebc  # Specify the exact image tag
+          image: w255mids.azurecr.io/savinay/project
           resources:
             requests:
               cpu: "200m"
