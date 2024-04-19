@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: project-prediction-container
-          image: w255mids.azurecr.io/savinay/project:2fec503
+          image: w255mids.azurecr.io/savinay/project:92fac8c
           env:
             - name: REDIS_URL
               value: redis://redis-service
@@ -26,11 +26,11 @@ spec:
               value: '6379'
           resources:
             requests:
-              cpu: 200m
-              memory: 500Mi
-            limits:
               cpu: 500m
-              memory: 500Mi
+              memory: 2000Mi
+            limits:
+              cpu: 3000m
+              memory: 3Gi
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000

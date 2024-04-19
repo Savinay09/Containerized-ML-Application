@@ -11,6 +11,8 @@ spec:
     - match:
         - uri:
             prefix: "/lab4/"
+        - uri:
+            prefix: "/lab4"
       rewrite:
         uri: "/"
       route:
@@ -21,6 +23,8 @@ spec:
     - match:
         - uri:
             prefix: "/project/"
+        - uri:
+            prefix: "/project"
       rewrite:
         uri: "/"
       route:
